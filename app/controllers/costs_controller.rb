@@ -16,8 +16,8 @@ class CostsController < ApplicationController
 
     estimated_price = false
 
-    zone_from = get_zone(longitude_from,latitude_from)
-    zone_to = get_zone(longitude_to, latitude_to)
+    zone_from = get_zone(latitude_from,longitude_from)
+    zone_to = get_zone(latitude_to, longitude_to)
 
     aux_cost_weight = Cost.where(["id = 1"]).first
 
