@@ -3,8 +3,8 @@ require 'net/http'
 
 class Cost < ActiveRecord::Base
 
-  def self.UpdateCost
-    url = URI("https://delivery-rates.mybluemix.net/cost")
+  def self.update_cost
+    url = URI(ENV['URICost'])
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -13,7 +13,7 @@ class Cost < ActiveRecord::Base
     cost = Cost.where(["id = ?", 1]).first
 
     request = Net::HTTP::Get.new(url)
-    request.basic_auth '146507', 'oCwSHoEeVlZS'
+    request.basic_auth ENV['AuthDeliveryRateAccount'], ENV['AuthDeliveryRatePassword']
 
     response = http.request(request)
 
@@ -35,8 +35,8 @@ class Cost < ActiveRecord::Base
     end
   end
 
-  def self.CreateCost
-    url = URI("https://delivery-rates.mybluemix.net/cost")
+  def self.create_cost
+    url = URI(ENV['URICost'])
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -45,13 +45,27 @@ class Cost < ActiveRecord::Base
     cost = Cost.where(["id = ?", 1]).first
 
     request = Net::HTTP::Get.new(url)
-    request.basic_auth '146507', 'oCwSHoEeVlZS'
+    request.basic_auth ENV['AuthDeliveryRateAccount'], ENV['AuthDeliveryRatePassword']
 
     response = http.request(request)
 
     arr = JSON.parse(response.read_body)
     cost = Cost.new(cost1: arr['cost'], cost2: arr['cost'], cost3:arr['cost'], lastUpdate: 3)
     cost.save!
+  end
+
+  def self.ping_delivery_rate
+    url = URI(ENV['URIDeliveryRates'])
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Get.new(url)
+    request.basic_auth ENV['AuthDeliveryRateAccount'], ENV['AuthDeliveryRatePassword']
+
+    response = http.request(request)
+
   end
 
 end

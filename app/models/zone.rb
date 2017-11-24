@@ -4,14 +4,14 @@ require 'net/http'
 class Zone < ActiveRecord::Base
 
   def self.CreateZonesAndCostZones
-    url = URI("https://delivery-rates.mybluemix.net/areas")
+    url = URI(ENV['URIAreas'])
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
     request = Net::HTTP::Get.new(url)
-    request.basic_auth '146507', 'oCwSHoEeVlZS'
+    request.basic_auth ENV['AuthDeliveryRateAccount'], ENV['AuthDeliveryRatePassword']
 
     response = http.request(request)
 

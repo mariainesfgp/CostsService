@@ -2,15 +2,15 @@ require 'uri'
 require 'net/http'
 
 class Costzone < ActiveRecord::Base
-  def self.UpdateCostZones
-    url = URI("https://delivery-rates.mybluemix.net/areas")
+  def self.update_cost_zones
+    url = URI(ENV['URIAreas'])
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
     request = Net::HTTP::Get.new(url)
-    request.basic_auth '146507', 'oCwSHoEeVlZS'
+    request.basic_auth ENV['AuthDeliveryRateAccount'], ENV['AuthDeliveryRatePassword']
 
     response = http.request(request)
 
