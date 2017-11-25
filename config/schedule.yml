@@ -1,0 +1,4 @@
+update_cost:
+  cron: "*/10 * * * *"
+  class: "UpdateCostJob"
+  queue: default
