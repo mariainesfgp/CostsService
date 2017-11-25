@@ -65,7 +65,18 @@ class Cost < ActiveRecord::Base
     request.basic_auth ENV['AuthDeliveryRateAccount'], ENV['AuthDeliveryRatePassword']
 
     response = http.request(request)
+  end
 
+  def self.get_cost_weight aux_cost_weight
+    if(aux_cost_weight.lastUpdate==1)
+      cost_weight = aux_cost_weight.cost1
+    else if(aux_cost_weight.lastUpdate == 2)
+           cost_weight = aux_cost_weight.cost2
+         else
+           cost_weight = aux_cost_weight.cost3
+         end
+    end
+    cost_weight
   end
 
 end

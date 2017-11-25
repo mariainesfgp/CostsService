@@ -34,4 +34,11 @@ class Zone < ActiveRecord::Base
       end
     end
   end
+
+  def self.get_zone lat, long
+    sql = 'SELECT * FROM zones WHERE st_contains(ST_GeomFromText(zones.polygon), ST_GeomFromText(?))'
+    point = 'POINT('+lat+''+long+')'
+    zone = Zone.find_by_sql([sql, point]).first.identify.to_i
+    zone
+  end
 end

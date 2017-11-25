@@ -33,4 +33,17 @@ class Costzone < ActiveRecord::Base
       end
     end
   end
+
+  def self.get_cost_zone aux_cost_zone
+    if(aux_cost_zone.lastUpdate==1)
+      cost_zone = aux_cost_zone.cost1
+    else if(aux_cost_zone.lastUpdate == 2)
+           cost_zone = aux_cost_zone.cost2
+         else
+           cost_zone = aux_cost_zone.cost3
+         end
+    end
+    cost_zone
+  end
+
 end
