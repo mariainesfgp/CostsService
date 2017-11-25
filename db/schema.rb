@@ -16,13 +16,6 @@ ActiveRecord::Schema.define(version: 20171119204523) do
   enable_extension "plpgsql"
   enable_extension "postgis"
 
-  create_table "authorization", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "user_id"
-    t.string "token"
-  end
-
   create_table "costs", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

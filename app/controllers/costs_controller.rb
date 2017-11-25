@@ -50,13 +50,13 @@ class CostsController < ApplicationController
     updated = true
     cost_weight = Cost.where(["id = 1"]).first
     cost_zones = Costzone.where(["id = 1"]).first
-    if cost_zones.updated_at>10.minutes.ago && cost_weight.updated_at>10.minutes.ago
+    if cost_zones.updated_at < 10.minutes.ago && cost_weight.updated_at < 10.minutes.ago
       updated = false
     end
     render :json => {:updated => updated}
   end
 
-  def prueba
+  def healthCheck
     render :json => {:ok => true}
   end
 end

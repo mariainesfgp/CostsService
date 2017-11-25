@@ -3,7 +3,7 @@ require 'net/http'
 
 class Zone < ActiveRecord::Base
 
-  def self.CreateZonesAndCostZones
+  def self.create_zones_and_cost_zones
     url = URI(ENV['URIAreas'])
 
     http = Net::HTTP.new(url.host, url.port)

@@ -1,2 +1,2 @@
-Zone.CreateZonesAndCostZones
-Cost.CreateCost
+Zone.create_zones_and_cost_zones
+Cost.create_cost
