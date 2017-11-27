@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     require 'sidekiq/cron/web'
     mount Sidekiq::Web => '/sidekiq'
 
-    get 'costs/healthCheck', to: 'costs#healthCheck'
+    get 'application/healthCheck', to: 'application#health_check'
     get 'costs/calculate_cost', to:'costs#calculate_cost'
     get 'costs/is_updated', to:'costs#is_updated'
 end

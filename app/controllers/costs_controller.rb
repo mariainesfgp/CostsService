@@ -56,7 +56,4 @@ class CostsController < ApplicationController
     render :json => {:updated => updated}
   end
 
-  def healthCheck
-    render :json => {:ok => true}
-  end
 end
